@@ -1,0 +1,15 @@
+Source: src
+Section: devel
+Priority: optional
+Maintainer: Diederik van Liere <dvanliere@wikimedia.org>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Vcs-Git: git://github.com/wmf-analytics/dclass-kraken.git
+Homepage: http://github.com/wmf-analytics/
+
+Package: dclass
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: dClass useragent classification tree
+ Library written by the great Weather Channel folks
+ to quickly parse a browser's useragent string.

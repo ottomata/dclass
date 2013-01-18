@@ -1,0 +1,13 @@
+git tag -a -m "version 2.0.12" 2.0.12 4aba1c7aeb8973f1b22bddd86ef9e8765c9d45c8
+git tag -a -m "version 2.0.11" 2.0.11 4e11e371611dbffda1132a3faf45f19f916c34c2
+git tag -a -m "version 2.0.10" 2.0.10 6cf61ce0e1f6cda17a91bc4818f4d9b30ea4c38c
+git tag -a -m "version 2.0.9" 2.0.9 4591e50b61bf763e908770d030445cf64d29890c
+git tag -a -m "version 2.0.8" 2.0.8 f638b645411b5f3c5cfaaeebec5a75798068f551
+git tag -a -m "version 2.0.7" 2.0.7 dd601af5ab60fa17658c9af7c0a67dd28ad2a856
+git tag -a -m "version 2.0.6" 2.0.6 908c552397656fa8628c421da9780dd0283b8f0d
+git tag -a -m "version 2.0.5" 2.0.5 dc6a64ac5cd0642478d37b15330657e6bd119140
+git tag -a -m "version 2.0.4" 2.0.4 4f77aef76d2f3cbebcb68e18575b71cf72670746
+git tag -a -m "version 2.0.2" 2.0.2 7c69dd9af69b0d17a9355d5a50f0f9521aa19118
+git tag -a -m "version 2.0.1" 2.0.1 15e637be5e341ee72565e705742a2a76d442ea07
+git tag -a -m "version 2.0.0" 2.0.0 17eb882ec585075d6f9d82e2419bab9368a86b8a
+git tag -a -m "version 1.4" 1.4 49f214244e86923f66c62b835734ece3521f144f
