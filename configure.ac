@@ -13,6 +13,14 @@ AC_PROG_CC
 AC_PROG_CPP
 AC_PROG_MAKE_SET
 
+AM_INIT_AUTOMAKE
+
+AC_PROG_LIBTOOL(libtool)
+LT_INIT
+#AC_ENABLE_SHARED
+#AC_DISABLE_STATIC
+#AC_PROG_LIBTOOL(libtool)
+
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lrt':
 AC_CHECK_LIB([rt], [main])
