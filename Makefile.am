@@ -1,3 +1,5 @@
+CFLAGS=
+
 lib_LTLIBRARIES = libdclass.la
 
 libdclass_la_SOURCES = src/dtree_core.c     \
@@ -7,4 +9,5 @@ libdclass_la_SOURCES = src/dtree_core.c     \
                        src/dtree_util.c     \
                        src/dclass_client.c
 
+libdclass_la_CFLAGS = -g
 libdclass_la_LDFLAGS = -shared

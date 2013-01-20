@@ -2,8 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([dClass], [2.0.12], [dvanliere@wikimedia.org])
-AC_CONFIG_SRCDIR([src/dclass_client.c])
+AC_INIT([libdclass], [2.0.12], [dvanliere@wikimedia.org])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 
@@ -15,7 +14,7 @@ AC_PROG_MAKE_SET
 
 AM_INIT_AUTOMAKE
 
-AC_PROG_LIBTOOL(libtool)
+AM_PROG_LIBTOOL
 LT_INIT
 #AC_ENABLE_SHARED
 #AC_DISABLE_STATIC
