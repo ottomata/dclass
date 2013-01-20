@@ -15,6 +15,7 @@
 
 
 
+
 pkgdatadir = $(datadir)/dclass
 pkgincludedir = $(includedir)/dclass
 pkglibdir = $(libdir)/dclass
@@ -31,11 +32,13 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = i686-pc-linux-gnu
+host_triplet = i686-pc-linux-gnu
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
-	install-sh missing
+	config.guess config.sub depcomp install-sh ltmain.sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -46,8 +49,59 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-SOURCES =
-DIST_SOURCES =
+am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
+am__vpath_adj = case $$p in \
+    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
+    *) f=$$p;; \
+  esac;
+am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
+am__install_max = 40
+am__nobase_strip_setup = \
+  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
+am__nobase_strip = \
+  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
+am__nobase_list = $(am__nobase_strip_setup); \
+  for p in $$list; do echo "$$p $$p"; done | \
+  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
+  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
+    if (++n[$$2] == $(am__install_max)) \
+      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
+    END { for (dir in files) print dir, files[dir] }'
+am__base_list = \
+  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
+  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+am__uninstall_files_from_dir = { \
+  test -z "$$files" \
+    || { test ! -d "$$dir" && test ! -f "$$dir" && test ! -r "$$dir"; } \
+    || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
+         $(am__cd) "$$dir" && rm -f $$files; }; \
+  }
+am__installdirs = "$(DESTDIR)$(libdir)"
+LTLIBRARIES = $(lib_LTLIBRARIES)
+libdclass_la_LIBADD =
+am_libdclass_la_OBJECTS = dtree_core.lo openddr_client.lo \
+	dclass_file.lo dtree_mem.lo dtree_util.lo dclass_client.lo
+libdclass_la_OBJECTS = $(am_libdclass_la_OBJECTS)
+libdclass_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(libdclass_la_LDFLAGS) $(LDFLAGS) -o $@
+DEFAULT_INCLUDES = -I.
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+SOURCES = $(libdclass_la_SOURCES)
+DIST_SOURCES = $(libdclass_la_SOURCES)
+ETAGS = etags
+CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -63,38 +117,53 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/diederik/dClass/missing --run aclocal-1.11
+ACLOCAL = ${SHELL} /home/user/wikistats/dClass/missing --run aclocal-1.11
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /home/diederik/dClass/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/diederik/dClass/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/diederik/dClass/missing --run automake-1.11
-AWK = mawk
+AR = ar
+AUTOCONF = ${SHELL} /home/user/wikistats/dClass/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/user/wikistats/dClass/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/user/wikistats/dClass/missing --run automake-1.11
+AWK = gawk
 CC = gcc
-CCDEPMODE = depmode=none
+CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DLLTOOL = false
+DSYMUTIL = 
+DUMPBIN = 
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
 EGREP = /bin/grep -E
 EXEEXT = 
+FGREP = /bin/grep -F
 GREP = /bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /usr/bin/ld
 LDFLAGS = 
 LIBOBJS = 
 LIBS = -lrt 
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIPO = 
+LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/diederik/dClass/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/user/wikistats/dClass/missing --run makeinfo
+MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
+NM = /usr/bin/nm -B
+NMEDIT = 
+OBJDUMP = objdump
 OBJEXT = o
+OTOOL = 
+OTOOL64 = 
 PACKAGE = dclass
 PACKAGE_BUGREPORT = dvanliere@wikimedia.org
 PACKAGE_NAME = dClass
@@ -103,33 +172,45 @@ PACKAGE_TARNAME = dclass
 PACKAGE_URL = 
 PACKAGE_VERSION = 2.0.12
 PATH_SEPARATOR = :
+RANLIB = ranlib
+SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
-STRIP = 
+STRIP = strip
 VERSION = 2.0.12
-abs_builddir = /home/diederik/dClass
-abs_srcdir = /home/diederik/dClass
-abs_top_builddir = /home/diederik/dClass
-abs_top_srcdir = /home/diederik/dClass
+abs_builddir = /home/user/wikistats/dClass
+abs_srcdir = /home/user/wikistats/dClass
+abs_top_builddir = /home/user/wikistats/dClass
+abs_top_srcdir = /home/user/wikistats/dClass
+ac_ct_AR = ar
 ac_ct_CC = gcc
+ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
+build = i686-pc-linux-gnu
 build_alias = 
+build_cpu = i686
+build_os = linux-gnu
+build_vendor = pc
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
+host = i686-pc-linux-gnu
 host_alias = 
+host_cpu = i686
+host_os = linux-gnu
+host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/diederik/dClass/install-sh
+install_sh = ${SHELL} /home/user/wikistats/dClass/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -149,10 +230,20 @@ target_alias =
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
+lib_LTLIBRARIES = libdclass.la
+libdclass_la_SOURCES = src/dtree_core.c     \
+		       src/openddr_client.c \
+		       src/dclass_file.c    \
+                       src/dtree_mem.c      \
+                       src/dtree_util.c     \
+                       src/dclass_client.c
+
+libdclass_la_LDFLAGS = -shared
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
+.SUFFIXES: .c .lo .o .obj
 am--refresh: Makefile
 	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
@@ -202,12 +293,176 @@ $(srcdir)/config.h.in:  $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
+install-libLTLIBRARIES: $(lib_LTLIBRARIES)
+	@$(NORMAL_INSTALL)
+	test -z "$(libdir)" || $(MKDIR_P) "$(DESTDIR)$(libdir)"
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	list2=; for p in $$list; do \
+	  if test -f $$p; then \
+	    list2="$$list2 $$p"; \
+	  else :; fi; \
+	done; \
+	test -z "$$list2" || { \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
+	}
+
+uninstall-libLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	for p in $$list; do \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
+	done
+
+clean-libLTLIBRARIES:
+	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
+	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
+libdclass.la: $(libdclass_la_OBJECTS) $(libdclass_la_DEPENDENCIES) $(EXTRA_libdclass_la_DEPENDENCIES) 
+	$(libdclass_la_LINK) -rpath $(libdir) $(libdclass_la_OBJECTS) $(libdclass_la_LIBADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT)
+
+distclean-compile:
+	-rm -f *.tab.c
+
+include ./$(DEPDIR)/dclass_client.Plo
+include ./$(DEPDIR)/dclass_file.Plo
+include ./$(DEPDIR)/dtree_core.Plo
+include ./$(DEPDIR)/dtree_mem.Plo
+include ./$(DEPDIR)/dtree_util.Plo
+include ./$(DEPDIR)/openddr_client.Plo
+
+.c.o:
+	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(COMPILE) -c $<
+
+.c.obj:
+	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+.c.lo:
+	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+#	source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LTCOMPILE) -c -o $@ $<
+
+dtree_core.lo: src/dtree_core.c
+	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dtree_core.lo -MD -MP -MF $(DEPDIR)/dtree_core.Tpo -c -o dtree_core.lo `test -f 'src/dtree_core.c' || echo '$(srcdir)/'`src/dtree_core.c
+	$(am__mv) $(DEPDIR)/dtree_core.Tpo $(DEPDIR)/dtree_core.Plo
+#	source='src/dtree_core.c' object='dtree_core.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dtree_core.lo `test -f 'src/dtree_core.c' || echo '$(srcdir)/'`src/dtree_core.c
+
+openddr_client.lo: src/openddr_client.c
+	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT openddr_client.lo -MD -MP -MF $(DEPDIR)/openddr_client.Tpo -c -o openddr_client.lo `test -f 'src/openddr_client.c' || echo '$(srcdir)/'`src/openddr_client.c
+	$(am__mv) $(DEPDIR)/openddr_client.Tpo $(DEPDIR)/openddr_client.Plo
+#	source='src/openddr_client.c' object='openddr_client.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o openddr_client.lo `test -f 'src/openddr_client.c' || echo '$(srcdir)/'`src/openddr_client.c
+
+dclass_file.lo: src/dclass_file.c
+	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dclass_file.lo -MD -MP -MF $(DEPDIR)/dclass_file.Tpo -c -o dclass_file.lo `test -f 'src/dclass_file.c' || echo '$(srcdir)/'`src/dclass_file.c
+	$(am__mv) $(DEPDIR)/dclass_file.Tpo $(DEPDIR)/dclass_file.Plo
+#	source='src/dclass_file.c' object='dclass_file.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dclass_file.lo `test -f 'src/dclass_file.c' || echo '$(srcdir)/'`src/dclass_file.c
+
+dtree_mem.lo: src/dtree_mem.c
+	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dtree_mem.lo -MD -MP -MF $(DEPDIR)/dtree_mem.Tpo -c -o dtree_mem.lo `test -f 'src/dtree_mem.c' || echo '$(srcdir)/'`src/dtree_mem.c
+	$(am__mv) $(DEPDIR)/dtree_mem.Tpo $(DEPDIR)/dtree_mem.Plo
+#	source='src/dtree_mem.c' object='dtree_mem.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dtree_mem.lo `test -f 'src/dtree_mem.c' || echo '$(srcdir)/'`src/dtree_mem.c
+
+dtree_util.lo: src/dtree_util.c
+	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dtree_util.lo -MD -MP -MF $(DEPDIR)/dtree_util.Tpo -c -o dtree_util.lo `test -f 'src/dtree_util.c' || echo '$(srcdir)/'`src/dtree_util.c
+	$(am__mv) $(DEPDIR)/dtree_util.Tpo $(DEPDIR)/dtree_util.Plo
+#	source='src/dtree_util.c' object='dtree_util.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dtree_util.lo `test -f 'src/dtree_util.c' || echo '$(srcdir)/'`src/dtree_util.c
+
+dclass_client.lo: src/dclass_client.c
+	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dclass_client.lo -MD -MP -MF $(DEPDIR)/dclass_client.Tpo -c -o dclass_client.lo `test -f 'src/dclass_client.c' || echo '$(srcdir)/'`src/dclass_client.c
+	$(am__mv) $(DEPDIR)/dclass_client.Tpo $(DEPDIR)/dclass_client.Plo
+#	source='src/dclass_client.c' object='dclass_client.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dclass_client.lo `test -f 'src/dclass_client.c' || echo '$(srcdir)/'`src/dclass_client.c
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+	-rm -f libtool config.lt
+
+ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
+	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '{ files[$$0] = 1; nonempty = 1; } \
+	      END { if (nonempty) { for (i in files) print i; }; }'`; \
+	mkid -fID $$unique
 tags: TAGS
-TAGS:
 
+TAGS:  $(HEADERS) $(SOURCES) config.h.in $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	set x; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS) config.h.in $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '{ files[$$0] = 1; nonempty = 1; } \
+	      END { if (nonempty) { for (i in files) print i; }; }'`; \
+	shift; \
+	if test -z "$(ETAGS_ARGS)$$*$$unique"; then :; else \
+	  test -n "$$unique" || unique=$$empty_fix; \
+	  if test $$# -gt 0; then \
+	    $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
+	      "$$@" $$unique; \
+	  else \
+	    $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
+	      $$unique; \
+	  fi; \
+	fi
 ctags: CTAGS
-CTAGS:
+CTAGS:  $(HEADERS) $(SOURCES) config.h.in $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	list='$(SOURCES) $(HEADERS) config.h.in $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '{ files[$$0] = 1; nonempty = 1; } \
+	      END { if (nonempty) { for (i in files) print i; }; }'`; \
+	test -z "$(CTAGS_ARGS)$$unique" \
+	  || $(CTAGS) $(CTAGSFLAGS) $(AM_CTAGSFLAGS) $(CTAGS_ARGS) \
+	     $$unique
 
+GTAGS:
+	here=`$(am__cd) $(top_builddir) && pwd` \
+	  && $(am__cd) $(top_srcdir) \
+	  && gtags -i $(GTAGS_ARGS) "$$here"
+
+distclean-tags:
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
@@ -373,8 +628,11 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-am
-all-am: Makefile config.h
+all-am: Makefile $(LTLIBRARIES) config.h
 installdirs:
+	for dir in "$(DESTDIR)$(libdir)"; do \
+	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+	done
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -407,12 +665,15 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic mostlyclean-am
+clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
+	mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-hdr
+distclean-am: clean-am distclean-compile distclean-generic \
+	distclean-hdr distclean-libtool distclean-tags
 
 dvi: dvi-am
 
@@ -432,7 +693,7 @@ install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am:
+install-exec-am: install-libLTLIBRARIES
 
 install-html: install-html-am
 
@@ -457,12 +718,14 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-generic
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-am
 
@@ -472,22 +735,26 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am:
+uninstall-am: uninstall-libLTLIBRARIES
 
 .MAKE: all install-am install-strip
 
-.PHONY: all all-am am--refresh check check-am clean clean-generic dist \
+.PHONY: CTAGS GTAGS all all-am am--refresh check check-am clean \
+	clean-generic clean-libLTLIBRARIES clean-libtool ctags dist \
 	dist-all dist-bzip2 dist-gzip dist-lzip dist-lzma dist-shar \
 	dist-tarZ dist-xz dist-zip distcheck distclean \
-	distclean-generic distclean-hdr distcleancheck distdir \
+	distclean-compile distclean-generic distclean-hdr \
+	distclean-libtool distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-generic pdf pdf-am ps ps-am uninstall uninstall-am
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-libLTLIBRARIES
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

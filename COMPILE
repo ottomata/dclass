@@ -1,0 +1,16 @@
+
+
+
+Right now you can do:
+
+  libtoolize;  
+  aclocal; 
+  autoheader ; 
+  autoconf ; 
+  automake --add-missing;
+  ./configure;
+  make;
+
+This will create .libs/libdclass.so
+
+
