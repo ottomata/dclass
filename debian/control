@@ -1,0 +1,14 @@
+Source: libdclass
+Section: misc
+Maintainer: Stefan Petrea <stefan@garage-coding.com> , Diederik van Liere <dvanliere@wikimedia.org>
+Priority: optional
+
+
+Package: libdclass
+Section: misc
+Priority: optional
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: file
+Description: A device detection library written by Rezan Naghib
+
