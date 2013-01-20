@@ -9,17 +9,21 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+export DESTDIR=$(CURDIR)/debian/libdclass
+
 %:
 	dh  $@
 
 install: build
-	dh_testdir
-	dh_testroot
-	dh_prep
-	dh_installdirs
+	dh_testdir;
+	dh_testroot;
+	dh_prep;
+	dh_installdirs;
 
-	mkdir -p $(CURDIR)/debian/libdclass
-	$(MAKE) DESTDIR=$(CURDIR)/debian/libdclass install-libLTLIBRARIES
+	mkdir -p "$(DESTDIR)/";
+	mkdir -p "$(DESTDIR)/usr/share/libdclass/dtrees/";
+	$(MAKE) DESTDIR=$(DESTDIR) install-libLTLIBRARIES;
+	cp $(CURDIR)/dtrees/*.dtree $(DESTDIR)/usr/share/libdclass/dtrees;
 
 binary-arch: build install
 		dh_testdir
