@@ -11,7 +11,8 @@ libdclass_la_SOURCES = src/dtree_core.c     \
 
 libdclassjni_la_SOURCES = jni/dclass-wrapper.c
 libdclassjni_la_CFLAGS  = -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wall -I ./jni/ -I./src/
-libdclassjni_la_LDFLAGS = -version-info $(SOVERSION) -no-undefined
+#libdclassjni_la_LDFLAGS = -version-info $(SOVERSION) -no-undefined
+libdclassjni_la_LDFLAGS = -no-undefined
 
 libdclass_la_CFLAGS = -g
 libdclass_la_LDFLAGS = -shared
