@@ -1,4 +1,5 @@
 autom4te.cache
+aclocal.m4
 *.log
 *.status
 install-sh
@@ -10,5 +11,8 @@ stamp-h1
 *.la
 .libs
 Makefile
+Makefile.in
 config.guess
+config.sub
 depcomp
+libtool
