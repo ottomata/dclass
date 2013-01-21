@@ -16,3 +16,4 @@ config.guess
 config.sub
 depcomp
 libtool
+.DS_store
