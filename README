@@ -8,6 +8,7 @@ Steps to build the debian package libdclass:
     # make sure you've pulled from upstream and merged. Afterwards
     # make sure to make a new tag and then
     ./git2deblogs.pl --generate
+    # Update the debian/symbols using the dpkg-gensymbols -e.libs/*.so -Odebian/symbols command 
     ## optional ( to clean out old packages )
     # rm -f ../libdclass_*;
     make clean; 
@@ -21,3 +22,5 @@ Steps to build the debian package libdclass:
     dpkg-buildpackage -us -uc;
     ## optional (to show contentl of the package)
     # dpkg -c ../libdclass_0.1_i386.deb
+    #Finally, check there are no important errors in the deb package using
+    lintian -Ivi /path/to/package.deb

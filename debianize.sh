@@ -1,1 +1,1 @@
-src/debianize.sh
+debianize/debianize.sh

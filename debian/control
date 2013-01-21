@@ -1,14 +1,18 @@
-Source: libdclass
-Section: misc
-Maintainer: Stefan Petrea <stefan@garage-coding.com> , Diederik van Liere <dvanliere@wikimedia.org>
+Source: libdclass0
+Section: devel
+Maintainer: Stefan Petrea <stefan@garage-coding.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Vcs-Git: git://github.com/wmf-analytics/dclass-kraken.git
+Homepage: http://github.com/wmf-analytics
 Priority: optional
 
 
-Package: libdclass
-Section: misc
+Package: libdclass0
 Priority: optional
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: file
-Description: A device detection library written by Rezan Naghib
-
+Description: Device detection library written by Rezan Naghib
+ Useragent device detection library written in C to quickly
+ parse a browser's useragent string.

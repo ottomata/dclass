@@ -5,3 +5,10 @@ install-sh
 ltmain.sh
 missing
 stamp-h1
+*.lo
+*.o
+*.la
+.libs
+Makefile
+config.guess
+depcomp

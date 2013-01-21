@@ -1,5 +1,5 @@
 CFLAGS=
-
+SOVERSION = 2.0.12
 lib_LTLIBRARIES = libdclass.la
 
 libdclass_la_SOURCES = src/dtree_core.c     \

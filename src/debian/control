@@ -7,7 +7,7 @@ Standards-Version: 3.8.4
 Vcs-Git: git://github.com/wmf-analytics/dclass-kraken.git
 Homepage: http://github.com/wmf-analytics/
 
-Package: dclass
+Package: libdclass-dev
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: dClass useragent classification tree
