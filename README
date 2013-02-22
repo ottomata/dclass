@@ -1,3 +1,22 @@
+Why do we need this dClass thing ?
+==================================
+
+Dclass is a library created by Rezan Naghibi. It's aimed at solving the problem of device detection and it's very good and fast at what it does.
+The original library is here https://github.com/TheWeatherChannel/dClass
+
+So why do we need it ?
+======================
+
+The Analytics team needs to produce mobile reports. You can classify user-agents into mobile/non-mobile. Dclass tells you much more than that.
+It tells you what resolution the device has. It tells you whether it is a tablet, or phone or desktop, who produced it, the brand name etc.
+
+How does the Analytics team use this dClass thing ?
+===================================================
+
+We are using it inside Kraken, but everything starts here in this repo. We make this JNI shared library so we can use it from Java(which is the language Kraken is written in).
+So, in short:
+
+   kraken => dClass Pig UDF => org. wikimedia.analytics.dclassjni.DclassWrapper.java => libdclassjni.so (or libdclassjni.dylib, depending on  Arch )
 
 Steps to build the debian package libdclass
 ===========================================
