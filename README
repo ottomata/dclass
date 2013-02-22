@@ -16,7 +16,7 @@ How does the Analytics team use this dClass thing ?
 We are using it inside Kraken, but everything starts here in this repo. We make this JNI shared library so we can use it from Java(which is the language Kraken is written in).
 So, in short:
 
-   kraken => dClass Pig UDF => org. wikimedia.analytics.dclassjni.DclassWrapper.java => libdclassjni.so (or libdclassjni.dylib, depending on  Arch )
+    kraken => dClass Pig UDF => org. wikimedia.analytics.dclassjni.DclassWrapper.java => libdclassjni.so (or libdclassjni.dylib, depending on  Arch )
 
 Steps to build the debian package libdclass
 ===========================================
