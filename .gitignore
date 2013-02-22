@@ -17,3 +17,4 @@ config.sub
 depcomp
 libtool
 .DS_store
+!README.md

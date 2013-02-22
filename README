@@ -1,6 +1,6 @@
 
-
-Steps to build the debian package libdclass:
+Steps to build the debian package libdclass
+===========================================
 
     # first of all you need to pull the debianize submodule
     git submodule update --init
@@ -24,3 +24,36 @@ Steps to build the debian package libdclass:
     # dpkg -c ../libdclass_0.1_i386.deb
     #Finally, check there are no important errors in the deb package using
     lintian -Ivi /path/to/package.deb
+
+Building for OSX
+================
+
+Get JDK6 from http://developer.apple.com or here
+
+
+Put this in your $HOME/.bashrc
+
+    export JAVA_HOME=`/usr/libexec/java_home`
+
+Get Mac Ports or brew and install them. Find more details about this here http://mxcl.github.com/homebrew/ or here http://www.macports.org/install.php .
+
+Make sure you install automake, autoconf, libtool with brew or Mac ports.
+
+Ok now we start building dClass. What we're trying to achieve is a shared object. On Linux it's called .so, on OSX it's called .dylib
+
+
+     glibtoolize
+     aclocal
+     autoheader
+     autoconf
+     automake --add-missing
+     ./configure
+     make
+     sudo make install
+
+To make sure you've done this right, check to see if you have the .dylib in place:
+
+     ls /usr/local/lib/libdclassjni.0.*
+
+If you get some files matching that, then you're good. If not then contact the Analytics team.
+
