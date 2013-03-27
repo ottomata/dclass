@@ -1,0 +1,10 @@
+Changes
+dClass.xs
+Makefile.PL
+MANIFEST
+ppport.h
+README
+t/UA-dClass.t
+fallback/const-c.inc
+fallback/const-xs.inc
+lib/UA/dClass.pm
