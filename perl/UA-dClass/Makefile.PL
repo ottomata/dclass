@@ -8,7 +8,7 @@ WriteMakefile(
     PREREQ_PM         => {}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/UA/dClass.pm', # retrieve abstract from module
-       AUTHOR         => 'user <user@>') : ()),
+       AUTHOR         => 'Stefan Petrea <stefan@garage-coding.com>') : ()),
     LIBS              => [''], # e.g., '-lm'
     DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
     INC               => '-I.', # e.g., '-I. -I/usr/include/other'
@@ -29,8 +29,7 @@ if  (eval {require ExtUtils::Constant; 1}) {
                                      XS_FILE      => 'const-xs.inc',
                                   );
 
-}
-else {
+} else {
   use File::Copy;
   use File::Spec;
   foreach my $file ('const-c.inc', 'const-xs.inc') {
