@@ -6,7 +6,6 @@ use warnings;
 use Carp;
 
 require Exporter;
-use AutoLoader;
 
 our @ISA = qw(Exporter);
 
@@ -14,6 +13,18 @@ our $VERSION = '2.02';
 
 require XSLoader;
 XSLoader::load('UA::dClass', $VERSION);
+
+sub new {
+  my ($class) = @_;
+  my $_o  = {};
+  my  $o  = bless $_o,$class;
+  my $ddr = "../../dtrees/openddr.dtree";
+  if(!-f $ddr) {
+    confess "[ERROR] no ddr file at $ddr";
+  };
+  $o->loadDDR($ddr);
+  return $o;
+};
 
 
 1;

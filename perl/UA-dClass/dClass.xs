@@ -4,11 +4,9 @@
 
 #include "ppport.h"
 
+#include <stdio.h>
+
 #include "const-c.inc"
-
-
-
-
 
 MODULE = UA::dClass		PACKAGE = UA::dClass		
 
@@ -16,14 +14,24 @@ INCLUDE:    const-xs.inc
 PROTOTYPES: ENABLE
 
 SV*
-classifyUA(self,UA)
+loadDDR(self,path)
   SV* self
-  SV* UA
+  SV* path
   CODE:
-    STRLEN ua_l;
-    char *ua_buf = SvPV(UA,ua_l);
+    STRLEN path_l;
+    char *path_buf = SvPV(path,path_l);
+    printf("path=%s\n",path_buf);
     RETVAL = NULL;
   OUTPUT:
     RETVAL
 
-
+SV*
+classifyUA(self,ua)
+  SV* self
+  SV* ua
+  CODE:
+    STRLEN ua_l;
+    char *ua_buf = SvPV(ua,ua_l);
+    RETVAL = NULL;
+  OUTPUT:
+    RETVAL
