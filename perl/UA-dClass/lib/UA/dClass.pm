@@ -16,16 +16,24 @@ XSLoader::load('UA::dClass', $VERSION);
 
 sub new {
   my ($class) = @_;
-  my $_o  = {};
+  my $_o  = {
+    "__dtree_pointer" => undef,
+  };
   my  $o  = bless $_o,$class;
   my $ddr = "../../dtrees/openddr.dtree";
   if(!-f $ddr) {
     confess "[ERROR] no ddr file at $ddr";
   };
   $o->loadDDR($ddr);
+  print "[Perl] $o->{__dtree_pointer}\n";
   return $o;
 };
 
+sub DESTROY {
+  my ($self) = @_;
+  print "[Perl] Destroy\n";
+  $self->freeDDR;
+};
 
 1;
 __END__
