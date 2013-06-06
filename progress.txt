@@ -1,0 +1,5 @@
+
+
+Currently compiling our .so is done with:
+
+  git clean -d -f -x; autoheader; aclocal; libtoolize --automake ; automake --foreign --add-missing ; autoconf ; ./configure; make; 
