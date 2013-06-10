@@ -1,0 +1,4 @@
+# REPLACE THIS WITH symlinks to real .so files to install for libdclass
+# e.g.
+# usr/lib/libdclass.so.0.0.0 usr/lib/libdclass.so
+# usr/lib/libdclass.so.0.0.0 usr/lib/libdclass.so.0

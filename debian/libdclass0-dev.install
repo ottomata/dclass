@@ -1,0 +1,3 @@
+src/dclass_client.h usr/include
+src/dtree_client.h usr/include
+src/openddr_client.h usr/include

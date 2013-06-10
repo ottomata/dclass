@@ -1,0 +1,35 @@
+Source: dclass
+Section: libs
+Priority: extra
+Maintainer: Andrew Otto <otto@wikimedia.org>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, default-jdk
+Standards-Version: 3.9.2
+Homepage: https://github.com/TheWeatherChannel/dClass
+Vcs-Git: https://gerrit.wikimedia.org/r/analytics/dclass
+Vcs-Browser: https://git.wikimedia.org/log/analytics%2Fdclass/refs%2Fheads%2Fwikimedia
+
+Package: libdclass0
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: dClass - Pattern Classification Engine
+ dClass is an indexed pattern classification engine. Unlike a search index which
+ indexes your data and runs queries over it, dClass indexes your queries
+ (patterns) and runs data over it, classifying the data against the patterns.
+
+Package: libdclass0-dev
+Section: libdevel
+Architecture: any
+Depends: libdclass (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: dClass - Pattern Classification Engine development package
+ dClass is an indexed pattern classification engine. Unlike a search index which
+ indexes your data and runs queries over it, dClass indexes your queries
+ (patterns) and runs data over it, classifying the data against the patterns.
+
+Package: libdclass0-jni
+Architecture: amd64
+Section: universe/java
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdclass0
+Description: Native JNI bindings for dClass - Pattern Classification Engine development package
+ dClass is an indexed pattern classification engine. Unlike a search index which
+ indexes your data and runs queries over it, dClass indexes your queries
+ (patterns) and runs data over it, classifying the data against the patterns.
